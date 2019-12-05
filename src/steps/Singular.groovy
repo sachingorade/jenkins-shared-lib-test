@@ -2,12 +2,10 @@ package steps
 
 def runForService(serviceName) {
 
-    stages {
+    System.out.print("Hello from " + serviceName)
 
-        stage {
-            checkout scm
-        }
+}
 
-    }
-
+public static void main(String[] args) {
+    new steps.Singular().runForService("hello")
 }
