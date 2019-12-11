@@ -1,6 +1,4 @@
-package steps
-
-def runForService(serviceName) {
+def call(serviceName) {
 
     pipeline {
         agent any
