@@ -11,13 +11,13 @@ def call(serviceName) {
 
             stage('Build') {
                 steps {
-                    sh 'mvn clean package -DskipTests=true'
+                    sh './mvnw clean package -DskipTests=true'
                 }
             }
 
             stage('Test') {
                 steps {
-                    sh 'mvn clean verify'
+                    sh './mvnw clean verify'
                 }
             }
 
