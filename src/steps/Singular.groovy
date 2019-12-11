@@ -2,10 +2,28 @@ package steps
 
 def runForService(serviceName) {
 
-    System.out.print("Hello from " + serviceName)
+    pipeline {
+        agent any
+        stages {
+            stage('Checkout github') {
+                steps {
+                    checkout scm
+                }
+            }
 
-}
+            stage('Build') {
+                steps {
+                    sh 'mvn clean package -DskipTests=true'
+                }
+            }
 
-public static void main(String[] args) {
-    new steps.Singular().runForService("hello")
+            stage('Test') {
+                steps {
+                    sh 'mvn clean verify'
+                }
+            }
+
+        }
+    }
+
 }
