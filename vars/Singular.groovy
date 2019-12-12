@@ -5,7 +5,11 @@ def call(serviceName) {
         stages {
             stage('Boot') {
                   steps {
-                      print env.JOB_BASE_NAME
+                      script {
+                            def allJob = env.JOB_NAME.tokenize('/') as String[];
+                            env.CURRENT_PROJECT_NAME = allJob[0];
+                      }
+                      print env.CURRENT_PROJECT_NAME
                   }
             }
             stage('Checkout github') {
