@@ -3,19 +3,19 @@ def call(serviceName) {
     pipeline {
         agent any
         stages {
-            stage('Checkout github') {
+            stage(env.JOB_BASE_NAME + ' Checkout github') {
                 steps {
                     checkout scm
                 }
             }
 
-            stage('Build') {
+            stage(env.JOB_BASE_NAME + ' Build') {
                 steps {
                     sh './mvnw clean package -DskipTests=true'
                 }
             }
 
-            stage('Test') {
+            stage(env.JOB_BASE_NAME + ' Test') {
                 steps {
                     sh './mvnw clean verify'
                 }
