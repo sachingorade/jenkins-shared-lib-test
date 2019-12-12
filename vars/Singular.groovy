@@ -3,7 +3,7 @@ def call(serviceName) {
     pipeline {
         agent any
         stages {
-            stage('Boot) {
+            stage('Boot') {
                   steps {
                       print env.JOB_BASE_NAME
                   }
