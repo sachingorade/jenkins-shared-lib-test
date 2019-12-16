@@ -1,4 +1,4 @@
-def call(serviceName) {
+def call(config) {
 
     pipeline {
         agent any
@@ -44,12 +44,22 @@ def call(serviceName) {
             }
 
             stage('Build') {
+                when {
+                    not {
+                        config.deployment.frozen
+                    }
+                }
                 steps {
                     sh './mvnw clean package -DskipTests=true'
                 }
             }
 
             stage('Test') {
+                when {
+                    not {
+                        config.deployment.frozen
+                    }
+                }
                 steps {
                     sh './mvnw clean verify'
                 }
