@@ -2,6 +2,9 @@ def call(serviceName) {
 
     pipeline {
         agent any
+        environment {
+            CI_CD_BRANCH = "develop"
+        }
         stages {
             stage('Boot') {
                   steps {
@@ -15,6 +18,28 @@ def call(serviceName) {
             stage('Checkout github') {
                 steps {
                     checkout scm
+                }
+            }
+            
+            stage('CI CD Branch check') {
+                when{
+                    branch env.CI_CD_BRANCH
+                }
+                steps {
+                    print 'Performing task in CI_CD_BRANCH'
+                    print env.CI_CD_BRANCH
+                }
+            }
+            
+            stage('Non CI CD Branch check') {
+                when {
+                    not {
+                        branch env.CI_CD_BRANCH
+                    }
+                }
+                steps {
+                    print 'Performing task in NON CI_CD_BRANCH'
+                    print env.CI_CD_BRANCH
                 }
             }
 
