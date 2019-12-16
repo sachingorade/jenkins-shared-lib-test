@@ -1,4 +1,4 @@
-def call(config) {
+def call(serviceConfig) {
 
     pipeline {
         agent any
@@ -13,6 +13,7 @@ def call(config) {
                             env.CURRENT_PROJECT_NAME = allJob[0];
                       }
                       print env.CURRENT_PROJECT_NAME
+                      print serviceConfig
                   }
             }
             stage('Checkout github') {
@@ -46,7 +47,7 @@ def call(config) {
             stage('Build') {
                 when {
                     not {
-                        expression { config.deployment.frozen == true }
+                        expression { serviceConfig.deployment.frozen == true }
                     }
                 }
                 steps {
@@ -57,7 +58,7 @@ def call(config) {
             stage('Test') {
                 when {
                     not {
-                        expression { config.deployment.frozen == true }
+                        expression { serviceConfig.deployment.frozen == true }
                     }
                 }
                 steps {
