@@ -46,7 +46,7 @@ def call(config) {
             stage('Build') {
                 when {
                     not {
-                        config.deployment.frozen
+                        expression { config.deployment.frozen }
                     }
                 }
                 steps {
@@ -57,7 +57,7 @@ def call(config) {
             stage('Test') {
                 when {
                     not {
-                        config.deployment.frozen
+                        expression { config.deployment.frozen }
                     }
                 }
                 steps {
