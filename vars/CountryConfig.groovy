@@ -1,5 +1,5 @@
 class CountryConfig {
-  boolean deployAT
-  boolean deployDE
-  boolean deployIN
+  boolean deployAT = true
+  boolean deployDE = true
+  boolean deployIN = true
 }
