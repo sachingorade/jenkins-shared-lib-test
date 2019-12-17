@@ -1,4 +1,4 @@
-def call(productConfig) {
+def call(productConfig, flag) {
 
     pipeline {
         agent any
@@ -69,6 +69,7 @@ def call(productConfig) {
             stage('Deploy At AT') {
                 when {
                     expression { productConfig.countryConfig.deployAT }
+                    expression { flag }
                 }
                 steps {
                     print 'Deploying at AT'
