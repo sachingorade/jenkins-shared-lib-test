@@ -73,7 +73,6 @@ def call(productConfig, flag) {
                     expression { productConfig.version == null }
                 }
                 steps {
-                    currentBuild.result = 'ABORTED'
                     error('Invalid build configuration provided.')
                 }
             }
