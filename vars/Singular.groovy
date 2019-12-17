@@ -44,7 +44,7 @@ def call(productConfig, flag) {
                     print env.CI_CD_BRANCH
                 }
             }
-
+            
             stage('Build') {
                 when {
                     not {
@@ -64,6 +64,17 @@ def call(productConfig, flag) {
                 }
                 steps {
                     sh './mvnw clean verify'
+                }
+            }
+            
+            stage('Parameter check') {
+                when {
+                    expression { productConfig == null }
+                    expression { productConfig.version == null }
+                }
+                steps {
+                    currentBuild.result = 'ABORTED'
+                    error('Invalid build configuration provided.')
                 }
             }
             
