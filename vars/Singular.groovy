@@ -65,6 +65,33 @@ def call(productConfig) {
                     sh './mvnw clean verify'
                 }
             }
+            
+            stage('Deploy At AT') {
+                when {
+                    expression { productConfig.countryConfig.deployAT }
+                }
+                steps {
+                    print 'Deploying at AT'
+                }
+            }
+            
+            stage('Deploy At DE') {
+                when {
+                    expression { productConfig.countryConfig.deployDE }
+                }
+                steps {
+                    print 'Deploying at DE'
+                }
+            }
+            
+            stage('Deploy At IN') {
+                when {
+                    expression { productConfig.countryConfig.deployIN }
+                }
+                steps {
+                    print 'Deploying at IN'
+                }
+            }
 
         }
     }
