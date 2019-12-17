@@ -25,6 +25,7 @@ def call(productConfig, flag) {
             stage('CI CD Branch check') {
                 when{
                     branch env.CI_CD_BRANCH
+                    expression { flag }
                 }
                 steps {
                     print 'Performing task in CI_CD_BRANCH'
