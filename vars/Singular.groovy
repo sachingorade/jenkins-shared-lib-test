@@ -47,7 +47,7 @@ def call(productConfig) {
             stage('Build') {
                 when {
                     not {
-                        expression { productConfig.deploymentFrozen == true }
+                        expression { productConfig.deploymentFrozen }
                     }
                 }
                 steps {
@@ -58,7 +58,7 @@ def call(productConfig) {
             stage('Test') {
                 when {
                     not {
-                        expression { productConfig.skipTests == true }
+                        expression { productConfig.skipTests }
                     }
                 }
                 steps {
