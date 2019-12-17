@@ -69,8 +69,7 @@ def call(productConfig, flag) {
             
             stage('Parameter check') {
                 when {
-                    expression { productConfig == null }
-                    expression { productConfig.version == null }
+                    expression { productConfig == null || productConfig.version == null }
                 }
                 steps {
                     error('Invalid build configuration provided.')
